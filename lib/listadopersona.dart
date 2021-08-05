@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rrhh/Drawer/widget_drawer.dart';
-import 'package:rrhh/listadoempleado.dart';
 import 'package:rrhh/models/personas.dart';
 import 'package:rrhh/services/personas_service.dart';
+
 
 // ignore: use_key_in_widget_constructors
 class ListadoPersonas extends StatefulWidget {

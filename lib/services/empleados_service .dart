@@ -1,5 +1,4 @@
 import 'package:http/http.dart' as http;
-// ignore: unused_import
 import 'package:rrhh/models/empleados.dart';
 
 class EmpleadosService {

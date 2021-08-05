@@ -3,7 +3,8 @@ import 'package:rrhh/dashboard.dart';
 import 'package:rrhh/listadoempleado.dart';
 import 'package:rrhh/listadopersona.dart';
 import 'dart:convert'; //Importamos libreria de dart a json
-import 'package:http/http.dart' as http; //Redefino mi libreria
+import 'package:http/http.dart' as http;
+import 'package:rrhh/vacacion.dart'; //Redefino mi libreria
 
 void main() => runApp(LoginApp());
 String username = '';
@@ -19,13 +20,12 @@ class LoginApp extends StatelessWidget {
       home: LoginPage(),
 
       //initialRoute: LoginPage.id,
-      routes: <String, WidgetBuilder>{
-        //Llamar a otras paginas y definimos sus rutas
-
+      routes: <String, WidgetBuilder>{ //Llamar a otras paginas y definimos sus rutas
         '/loginpage': (BuildContext context) => LoginPage(),
         '/listadopersona': (BuildContext context) => new ListadoPersonas(),
         '/listadoempleado': (BuildContext context) => new ListadoEmpleados(),
         '/dashboard': (BuildContext context) => new Dashboard(),
+        '/vacacion': (BuildContext context) => new Vacacion(),
 
         //      LoginPage.id : (context) => LoginPage(),
       },
