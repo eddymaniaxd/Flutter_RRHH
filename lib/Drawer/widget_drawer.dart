@@ -44,7 +44,7 @@ class MenuLateral extends StatelessWidget {
         leading: Icon(Icons.airplane_ticket),
         title: Text('Solicitar Vacacion'),
         onTap: (){
-          Navigator.pushNamed(context, '/vacacion');
+          Navigator.pushNamed(context, '/askvacacion');
         },
       ),
       ListTile( //Asi definimos nuevos campos para interactuar y redireccionarlos a nuestras rutas
