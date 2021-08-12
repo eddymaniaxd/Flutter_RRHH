@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:rrhh/Drawer/widget_drawer.dart';
-
-class Vacacion extends StatefulWidget {
+import 'package:rrhh/models/vacaciones.dart';
+import 'package:rrhh/services/vacaciones_service.dart';
+class VacacionVista extends StatefulWidget {
    @override
-  _VacacionState createState() => _VacacionState();
+  _VacacionVistaState createState() => _VacacionVistaState();
 }
 
-  class _VacacionState extends State<Vacacion> {
+  class _VacacionVistaState extends State<VacacionVista> {
     TextEditingController controllerFini = new TextEditingController(); 
     TextEditingController controllerFin = new TextEditingController(); 
     TextEditingController controllerObs = new TextEditingController(); 
+    TextEditingController controllerEp = new TextEditingController(); 
   
   //DateTime _dateTime[12,12];
   var selectDate;
@@ -31,6 +33,10 @@ class Vacacion extends StatefulWidget {
               _fechafintextfield(),
               SizedBox(
                 height: 20.0,
+              ),
+              _empleadotextfield(),
+              SizedBox(
+                height: 15,
               ),
               _obsertextfield(),
               SizedBox(
@@ -108,7 +114,7 @@ return StreamBuilder(
     });
     
   }
-
+String mensaje ="";
   Widget _bottomSoli() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -117,10 +123,44 @@ return StreamBuilder(
             padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
             child: Text('Enviar Solicitud'),
           ),
-        onPressed: () {
-        
+        onPressed: () async{
+          
+          Vacacion vacacion = new Vacacion (fechaIni: DateTime.parse(
+          controllerFini.text), fechaFin: DateTime.parse(controllerFin.text)  , 
+          observacion:  controllerObs.text, empleadoId: controllerEp.text);
+          
+          bool estado = await new VacacionesService().solivacacion(vacacion);
+          if (estado){
+            Navigator.pushNamed(context, '');
+          }else {
+            setState(() {
+                mensaje = "Error!";
+            });
+          }
+          
           });
     });
+  }
+
+  Widget _empleadotextfield() {
+return StreamBuilder(
+      // ignore: non_constant_identifier_names
+      builder: (BuildContext context, AsyncSnapshot) {
+        return Container (
+          padding: EdgeInsets.all(20),
+           child: TextFormField(
+            controller: controllerEp ,
+             decoration: InputDecoration(
+               labelText: 'EmpleadoID',
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+              fillColor: Colors.grey[300], 
+              filled: true,
+              //hintText: "Ingresa fecha final vacacional"
+            ),
+          )
+        );
+    });
+
   } 
   }
 

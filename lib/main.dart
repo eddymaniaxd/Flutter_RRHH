@@ -25,7 +25,7 @@ class LoginApp extends StatelessWidget {
         '/listadopersona': (BuildContext context) => new ListadoPersonas(),
         '/listadoempleado': (BuildContext context) => new ListadoEmpleados(),
         '/dashboard': (BuildContext context) => new Dashboard(),
-        '/askvacacion': (BuildContext context) => new Vacacion(),
+        '/askvacacion': (BuildContext context) => new VacacionVista(),
 
         //      LoginPage.id : (context) => LoginPage(),
       },
