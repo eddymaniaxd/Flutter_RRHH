@@ -9,7 +9,7 @@ import 'package:rrhh/listadosolicitud.dart'; //Redefino mi libreria
 
 void main() => runApp(LoginApp());
 String username = '';
-
+String id = '';
 //String username;
 
 class LoginApp extends StatelessWidget {
@@ -46,14 +46,12 @@ class _LoginPageState extends State<LoginPage> {
       new TextEditingController(); //PasswordUser
 
   String mensaje = '';
-
   // ignore: non_constant_identifier_names
   void Login() async {
     //Llamada post/request a nuestra api  para autentificar su logeo
     print(controllerUserEmp.text);
     print(controllerPass.text);
-    var url =
-        Uri.parse('https://getdataproject.com/rrhh/public/api/autentificar');
+    var url = Uri.parse('http://127.0.0.1:8000/api/autentificar');
 
     var response = await http.post(url,
         headers: {'Content-Type': 'application/json'},
@@ -62,8 +60,10 @@ class _LoginPageState extends State<LoginPage> {
 
     var datauserEmp = json
         .decode(response.body); //La consulta de la api, la almacena en response
-
+    
     if (datauserEmp['success']) {
+      
+      
       Navigator.pushReplacementNamed(context, '/dashboard');
       setState(() {
         username = datauserEmp[
@@ -174,8 +174,8 @@ class _LoginPageState extends State<LoginPage> {
           color: Colors.lightBlue,
           onPressed: () {
             //Aqui tenemos q llamar a la funcion login
-            Navigator.pushReplacementNamed(context, '/dashboard');
-//            Login();
+            //Navigator.pushReplacementNamed(context, '/dashboard');
+           Login();
           });
     });
   }
