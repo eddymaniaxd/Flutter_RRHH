@@ -4,7 +4,8 @@ import 'package:rrhh/listadoempleado.dart';
 import 'package:rrhh/listadopersona.dart';
 import 'dart:convert'; //Importamos libreria de dart a json
 import 'package:http/http.dart' as http;
-import 'package:rrhh/askvacacion.dart'; //Redefino mi libreria
+import 'package:rrhh/askvacacion.dart';
+import 'package:rrhh/listadosolicitud.dart'; //Redefino mi libreria
 
 void main() => runApp(LoginApp());
 String username = '';
@@ -26,6 +27,7 @@ class LoginApp extends StatelessWidget {
         '/listadoempleado': (BuildContext context) => new ListadoEmpleados(),
         '/dashboard': (BuildContext context) => new Dashboard(),
         '/askvacacion': (BuildContext context) => new VacacionVista(),
+        '/listadosolicitud': (BuildContext context) => new VistaSolicitudes(),
 
         //      LoginPage.id : (context) => LoginPage(),
       },

@@ -11,7 +11,7 @@ class VacacionVista extends StatefulWidget {
     TextEditingController controllerFini = new TextEditingController(); 
     TextEditingController controllerFin = new TextEditingController(); 
     TextEditingController controllerObs = new TextEditingController(); 
-    TextEditingController controllerEp = new TextEditingController(); 
+  
   
   //DateTime _dateTime[12,12];
   var selectDate;
@@ -34,15 +34,17 @@ class VacacionVista extends StatefulWidget {
               SizedBox(
                 height: 20.0,
               ),
-              _empleadotextfield(),
-              SizedBox(
-                height: 15,
-              ),
+   
               _obsertextfield(),
               SizedBox(
                 height: 20.0,
               ),
               _bottomSoli(),
+                  SizedBox(
+                height: 20.0,
+              ),
+          
+              _bottomSVerSolic(),
 
         ],
       ),
@@ -101,7 +103,7 @@ return StreamBuilder(
         return Container (
           padding: EdgeInsets.all(20),
            child: TextFormField(
-            controller: controllerFin ,
+            controller: controllerObs ,
              decoration: InputDecoration(
                labelText: 'Observacion',
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
@@ -114,8 +116,10 @@ return StreamBuilder(
     });
     
   }
+    
+
 String mensaje ="";
-  Widget _bottomSoli() {
+  Widget _bottomSoli() { //Agregar boton para mostrar vacaciones_solicitudes
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return ElevatedButton(
@@ -125,13 +129,14 @@ String mensaje ="";
           ),
         onPressed: () async{
           
-          Vacacion vacacion = new Vacacion (fechaIni: DateTime.parse(
-          controllerFini.text), fechaFin: DateTime.parse(controllerFin.text)  , 
-          observacion:  controllerObs.text, empleadoId: controllerEp.text);
+          Vacacion vacacion = new Vacacion (
+            fechaIni: controllerFini.text, 
+            fechaFin: controllerFin.text , 
+            observacion:  controllerObs.text, );
           
           bool estado = await new VacacionesService().solivacacion(vacacion);
           if (estado){
-            Navigator.pushNamed(context, '');
+            Navigator.pushNamed(context, '/dashboard'); //agregar vista listado solicitud (routes)
           }else {
             setState(() {
                 mensaje = "Error!";
@@ -142,25 +147,26 @@ String mensaje ="";
     });
   }
 
-  Widget _empleadotextfield() {
-return StreamBuilder(
-      // ignore: non_constant_identifier_names
-      builder: (BuildContext context, AsyncSnapshot) {
-        return Container (
-          padding: EdgeInsets.all(20),
-           child: TextFormField(
-            controller: controllerEp ,
-             decoration: InputDecoration(
-               labelText: 'EmpleadoID',
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-              fillColor: Colors.grey[300], 
-              filled: true,
-              //hintText: "Ingresa fecha final vacacional"
-            ),
-          )
-        );
+Widget  _bottomSVerSolic() {
+  
+  return StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      // ignore: deprecated_member_use
+      return RaisedButton(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+            child: Text('Ver Solicitud'),
+          ),
+          
+          shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10)),
+          elevation: 10.0, 
+          color: Colors.greenAccent,
+          onPressed: () {
+              Navigator.pushNamed(context, '/listadosolicitud');
+          });
     });
+}
 
-  } 
   }
 
