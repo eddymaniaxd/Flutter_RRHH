@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rrhh/Drawer/widget_drawer.dart';
 import 'package:rrhh/models/vacaciones.dart';
 import 'package:rrhh/services/vacaciones_service.dart';
+import 'package:http/http.dart' as http;
 class VacacionVista extends StatefulWidget {
    @override
   _VacacionVistaState createState() => _VacacionVistaState();
@@ -11,11 +12,21 @@ class VacacionVista extends StatefulWidget {
     TextEditingController controllerFini = new TextEditingController(); 
     TextEditingController controllerFin = new TextEditingController(); 
     TextEditingController controllerObs = new TextEditingController(); 
-  
+//Controladores para mostrar dias disponibles y Controlador para mostrar dias solicitados  
+    TextEditingController controllerDiasdispo = new TextEditingController(); 
+    TextEditingController controllerDiasolic = new TextEditingController(); 
   
   //DateTime _dateTime[12,12];
-  var selectDate;
+  var totdias ='';
+void diassoli() async{
+var url = Uri.parse('http://127.0.0.1:8000/api/vacaciones/dias-vacaciones');
+var response = await http.get(url);
+var totdias = (response);//devuelve int
+print(totdias);
 
+
+
+}
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,24 +39,34 @@ class VacacionVista extends StatefulWidget {
         new Text('Solicite su Vacacion!'),
           _fechainitextfield(),
               SizedBox(
-                height: 15,
+                height: 1.0,
               ),
               _fechafintextfield(),
               SizedBox(
-                height: 20.0,
+                height: 1.0,
+              ),
+              _diasdispontextfield(),
+              SizedBox(
+                //height: 1.0,
+              ),
+              _totaldiassoltextfield(),
+              SizedBox(
+                height: 2.0,
               ),
    
               _obsertextfield(),
               SizedBox(
-                height: 20.0,
+                height: 2.0,
               ),
               _bottomSoli(),
                   SizedBox(
-                height: 20.0,
+                height: 2.0,
               ),
           
               _bottomSVerSolic(),
-
+                 SizedBox(
+                height: 2.0,
+              ),
         ],
       ),
       drawer: MenuLateral(),
@@ -93,7 +114,46 @@ class VacacionVista extends StatefulWidget {
           );
 
     });
-    
+      }
+    Widget _diasdispontextfield() {
+return StreamBuilder(
+      // ignore: non_constant_identifier_names
+    builder: (BuildContext context, AsyncSnapshot) {
+        return Container (
+          padding: EdgeInsets.all(20),
+           child: TextFormField(
+            controller: controllerDiasolic ,
+             decoration: InputDecoration(
+               labelText: 'Dias disponibles',
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+              fillColor: Colors.grey[300], 
+              filled: true,
+              hintText: "Ingresa fecha final vacacional"
+            ),
+          )
+        );
+    });
+}
+  Widget _totaldiassoltextfield() {
+    return StreamBuilder(
+      // ignore: non_constant_identifier_names
+      builder: (BuildContext context, AsyncSnapshot) {
+        return Container (
+          padding: EdgeInsets.all(20),
+           child: TextFormField(
+            controller: controllerDiasolic ,
+             decoration: InputDecoration(
+               labelText: 'Total dias solicitados',
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+              fillColor: Colors.grey[300], 
+              filled: true,
+              //hintText: "Ingresa fecha final vacacional"
+            ),
+          )
+        );
+    });
+
+
   }
 
   Widget _obsertextfield() {
@@ -124,7 +184,7 @@ String mensaje ="";
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return ElevatedButton(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
             child: Text('Enviar Solicitud'),
           ),
         onPressed: () async{
@@ -154,7 +214,7 @@ Widget  _bottomSVerSolic() {
       // ignore: deprecated_member_use
       return RaisedButton(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
             child: Text('Ver Solicitud'),
           ),
           
@@ -163,10 +223,13 @@ Widget  _bottomSVerSolic() {
           elevation: 10.0, 
           color: Colors.greenAccent,
           onPressed: () {
+//          diassoli();
               Navigator.pushNamed(context, '/listadosolicitud');
           });
     });
 }
+
+
 
   }
 
