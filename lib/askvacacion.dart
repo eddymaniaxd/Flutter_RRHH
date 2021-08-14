@@ -21,8 +21,9 @@ class VacacionVista extends StatefulWidget {
 void diassoli() async{
 var url = Uri.parse('http://127.0.0.1:8000/api/vacaciones/dias-vacaciones');
 var response = await http.get(url);
-var totdias = (response);//devuelve int
-print(totdias);
+var body = response;
+print(body);
+
 
 
 
@@ -223,7 +224,7 @@ Widget  _bottomSVerSolic() {
           elevation: 10.0, 
           color: Colors.greenAccent,
           onPressed: () {
-//          diassoli();
+          diassoli();
               Navigator.pushNamed(context, '/listadosolicitud');
           });
     });

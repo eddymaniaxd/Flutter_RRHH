@@ -59,14 +59,17 @@ class _LoginPageState extends State<LoginPage> {
 
     var datauserEmp = json
         .decode(response.body); //La consulta de la api, la almacena en response
+    //var id = datauserEmp['id'];
+    
+    //await FlutterSession().set('id',id);
     print(datauserEmp['id']);
     if (datauserEmp['success']) {
-      
+      //var id = datauserEmp['id'];
       
       Navigator.pushReplacementNamed(context, '/dashboard');
       setState(() {
         username = datauserEmp[
-            'nombre']; //Asigno el usuario que obtengo de mi response, username declarada.
+            'nombre']; 
       });
     } else {
       setState(() {
