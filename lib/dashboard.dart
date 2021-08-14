@@ -18,7 +18,7 @@ class _DashboardState extends State<Dashboard> {
           title: Text('NICE TO SEE YOU AGAIN'),
         ),
         //backgroundColor: Colors.tealAccent,
-        drawer:MenuLateral() ,  
+        drawer:MenuLateral(),  
         body: Container(
           child: Stack(
            children: <Widget>[
