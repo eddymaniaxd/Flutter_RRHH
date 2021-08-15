@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rrhh/dashboard.dart';
 import 'package:rrhh/listadoboleta.dart';
+import 'package:rrhh/listadoempleado.dart';
 import 'package:rrhh/listadopersona.dart';
 import 'dart:convert'; //Importamos libreria de dart a json
 import 'package:http/http.dart' as http;
@@ -24,7 +25,7 @@ class LoginApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{ //Llamar a otras paginas y definimos sus rutas
         '/loginpage': (BuildContext context) => LoginPage(),
         '/listadopersona': (BuildContext context) => new ListadoPersonas(),
-        //'/listadoempleado': (BuildContext context) => new ListadoEmpleados(),
+        '/listadoempleado': (BuildContext context) => new ListadoEmpleado(),
         '/dashboard': (BuildContext context) => new Dashboard(),
         '/askvacacion': (BuildContext context) => new VacacionVista(),
         '/listadosolicitud': (BuildContext context) => new VistaSolicitudes(),

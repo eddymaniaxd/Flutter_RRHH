@@ -45,7 +45,9 @@ class MenuLateral extends StatelessWidget {
       ListTile( //Asi definimos nuevos campos para interactuar y redireccionarlos a nuestras rutas
         leading: Icon(Icons.analytics_rounded),
         title: Text('Mis Datos'),
-        onTap: (){},
+        onTap: (){
+          Navigator.pushNamed(context, '/listadoempleado');
+        },
       ),
       ListTile( //Asi definimos nuevos campos para interactuar y redireccionarlos a nuestras rutas
         leading: Icon(Icons.airplane_ticket),
