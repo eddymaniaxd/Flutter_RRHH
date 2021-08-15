@@ -9,6 +9,7 @@ EmpleadoDatos empleadoDatosFromMap(String str) => EmpleadoDatos.fromMap(json.dec
 String empleadoDatosToMap(EmpleadoDatos data) => json.encode(data.toMap());
 
 class EmpleadoDatos {
+
     EmpleadoDatos({
         required this.id,
         required this.correoCorporativo,

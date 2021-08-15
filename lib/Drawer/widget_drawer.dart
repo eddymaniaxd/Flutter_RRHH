@@ -55,6 +55,13 @@ class MenuLateral extends StatelessWidget {
         },
       ),
       ListTile( //Asi definimos nuevos campos para interactuar y redireccionarlos a nuestras rutas
+        leading: Icon(Icons.book_sharp),
+        title: Text('Mi Boleta'),
+        onTap: (){
+          Navigator.pushNamed(context, '/listadoboleta');
+        },
+      ),
+      ListTile( //Asi definimos nuevos campos para interactuar y redireccionarlos a nuestras rutas
         leading: Icon(Icons.bedtime_rounded),
         title: Text('Log Out'),
         onTap: (){

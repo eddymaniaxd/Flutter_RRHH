@@ -19,6 +19,7 @@ class _VacacionVistaState extends State<VacacionVista> {
 //Controladores para mostrar dias disponibles y Controlador para mostrar dias solicitados
   TextEditingController controllerDiasdispo = new TextEditingController();
   TextEditingController controllerDiasolic = new TextEditingController();
+  //bool _enabled = false;
 
   //DateTime _dateTime[12,12];
   var totdias = '';
@@ -26,7 +27,7 @@ class _VacacionVistaState extends State<VacacionVista> {
     var fechaIni = controllerFini.text;
     var fechaFin = controllerFin.text;
     var url = Uri.parse(
-        'http://127.0.0.1:80/rrhh/public/api/vacaciones/dias-vacaciones?fecha_ini=' +
+        'https://getdataproject.com/rrhh/public/api/vacaciones/dias-vacaciones?fecha_ini=' +
             fechaIni +
             '&fecha_fin=' +
             fechaFin);
@@ -37,7 +38,7 @@ class _VacacionVistaState extends State<VacacionVista> {
 
   void diasDisponibles() async {
     var url = Uri.parse(
-        'http://localhost/rrhh/public/api/vacaciones/dias?empleado_id=' +
+        'https://getdataproject.com/rrhh/public/api/vacaciones/dias?empleado_id=' +
             empleado_id);
     var response = await http.get(url);
     var data = json.decode(response.body);
@@ -66,6 +67,7 @@ class _VacacionVistaState extends State<VacacionVista> {
               height: 1.0,
             ),
             _diasdispontextfield(),
+      
             SizedBox(
                 //height: 1.0,
                 ),
@@ -143,6 +145,7 @@ class _VacacionVistaState extends State<VacacionVista> {
       return Container(
           padding: EdgeInsets.all(20),
           child: TextFormField(
+            readOnly: true,
             controller: controllerDiasdispo,
             decoration: InputDecoration(
                 labelText: 'Dias disponibles',
@@ -162,6 +165,7 @@ class _VacacionVistaState extends State<VacacionVista> {
       return Container(
           padding: EdgeInsets.all(20),
           child: TextFormField(
+            readOnly: true,
             controller: controllerDiasolic,
             decoration: InputDecoration(
               labelText: 'Total dias solicitados',
@@ -225,7 +229,24 @@ class _VacacionVistaState extends State<VacacionVista> {
                 });
               }
             } else {/// alert, mensaje que diga "los dias solicitados es mayor a los dias que disponibles de vacaciones"
-              
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context)=> AlertDialog(
+                    title: Text('ERROR! Ya no tienes dias disponibles para tu vacacion'),
+                    
+                    content: Text('Dias solicitados es mayor a los dias  disponibles'),
+                    actions: <Widget>[
+                      // ignore: deprecated_member_use
+                      FlatButton(onPressed: (){
+                            Navigator.pushNamed(context, '/askvacacion');
+                      },
+                       child: Text('Volver'))
+                    ],
+                    //backgroundColor: Colors.redAccent,
+                    //shape: CircleBorder(),
+                  ),
+                  );
             }
           });
     });

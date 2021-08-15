@@ -61,11 +61,14 @@ class _ListadoPersonasState extends State<ListadoPersonas> {
                     // ClientDatabaseProvider.db.deleteClientWithId(item.id);
                   },
                   child: ListTile(
+                    
                     title: Text(item.nombres),
                     subtitle: Text(item.celular!),
                     leading: CircleAvatar(
                       child: Text(item.id.toString()),
+                      
                     ),
+                  
                     onTap: () {
                       // Navigator.of(context).push(
                       //   MaterialPageRoute(
