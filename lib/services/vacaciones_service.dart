@@ -5,7 +5,7 @@ import 'package:rrhh/models/vacaciones.dart';
 
 class VacacionesService {
   Future<bool> solivacacion(Vacacion vacacion) async {
-    final url = 'http://127.0.0.1:8000/api/vacaciones/solicitud';
+    final url = 'http://localhost/rrhh/public/api/vacaciones/solicitud';
     var vac = vacacionToMap(vacacion);
     final response = await http.post(Uri.parse(url),
     body: vac,

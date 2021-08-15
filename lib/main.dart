@@ -50,15 +50,14 @@ class _LoginPageState extends State<LoginPage> {
     //Llamada post/request a nuestra api  para autentificar su logeo
     print(controllerUserEmp.text);
     print(controllerPass.text);
-    var url = Uri.parse('http://127.0.0.1:8000/api/autentificar');
+    var url = Uri.parse('http://127.0.0.1:80/rrhh/public/api/autentificar');
 
     var response = await http.post(url,
         headers: {'Content-Type': 'application/json'},
         body: json.encode(
             {'login': controllerUserEmp.text, 'pass': controllerPass.text}));
 
-    var datauserEmp = json
-        .decode(response.body); //La consulta de la api, la almacena en response
+    var datauserEmp = json.decode(response.body); //La consulta de la api, la almacena en response
     //var id = datauserEmp['id'];
     
     //await FlutterSession().set('id',id);

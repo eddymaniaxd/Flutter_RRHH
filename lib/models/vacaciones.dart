@@ -15,26 +15,26 @@ class Vacacion {
         required this.fechaIni,
         required this.fechaFin,
         required this.observacion,
-      //  required this.empleadoId,
+        required this.empleado_id
     });
 
     final String fechaIni;
     final String fechaFin;
     final String observacion;
-    //final String empleadoId;
+    final String empleado_id;
 
 
     factory Vacacion.fromMap(Map<String, dynamic> json) => Vacacion(
         fechaIni: json["fecha_ini"],
         fechaFin: json["fecha_fin"],
         observacion: json["observacion"],
-        //empleadoId: json["empleado_id"],
+        empleado_id: json["empleado_id"],
     );
 
     Map<String, dynamic> toMap() => {
         "fecha_ini": fechaIni,
         "fecha_fin": fechaFin,
         "observacion": observacion,
-//        "empleado_id": empleadoId,
+        "empleado_id": empleado_id,
     };
 }
